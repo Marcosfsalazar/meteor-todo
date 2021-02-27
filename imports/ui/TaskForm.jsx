@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { TasksCollection } from '../api/TasksCollection';
+import { Meteor } from 'meteor/meteor';
+import { TasksCollection } from '../db/TasksCollection'
 
-export const TaskForm = ({ user }) => {
+export const TaskForm = () => {
   const [text, setText] = useState("");
 
   const handleSubmit = e => {
@@ -9,11 +10,7 @@ export const TaskForm = ({ user }) => {
 
     if(!text) return;
 
-    TasksCollection.insert({
-      text: text.trim(),
-      createdAt: new Date(),
-      userId: user._id,
-    })
+    Meteor.call('tasks.insert',text);
 
     setText("");
   };
@@ -22,7 +19,7 @@ export const TaskForm = ({ user }) => {
     <form action="" className='task-form' onSubmit={handleSubmit}>
       <input type="text"
       placeholder='Type to add new tasks'
-      value={text}
+      value={ text }
       onChange={(e) => setText(e.target.value)}/>
 
       <button type='submit'>Add Task</button>

@@ -183,3 +183,12 @@ header {
   margin: 8px 16px 0;
   font-weight: bold;
 }
+
+.logout-div{
+  padding: 0.25rem;
+  border: 1px solid #0101;
+}
+
+.logout-div:hover{
+  cursor: pointer;
+}
